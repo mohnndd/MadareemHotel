@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--  this code for change view    -->
+
+    <record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
+        <field name="view_mode">calendar,kanban,tree,form,pivot,graph,activity</field>
+    </record>
+
+    <record id="sale.sale_order_action_view_order_calendar" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="sale.view_sale_order_calendar"/>
+        <field name="act_window_id" ref="sale.action_quotations_with_onboarding"/>
+    </record>
+
+    <record id="sale.sale_order_action_view_order_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="sale.view_order_tree"/>
+        <field name="act_window_id" ref="sale.action_quotations_with_onboarding"/>
+    </record>
+
+    <record id="sale.sale_order_action_view_order_kanban" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="sale.view_sale_order_kanban"/>
+        <field name="act_window_id" ref="sale.action_quotations_with_onboarding"/>
+    </record>
+
+    <record id="sale_order_action_view_order_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="4"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sale.view_order_form"/>
+        <field name="act_window_id" ref="sale.action_quotations_with_onboarding"/>
+    </record>
+
+    <!--   Add two fields check-in and check-out date -->
+    <record id="hall_sale_view_form_inherit" model="ir.ui.view">
+        <field name="name">hall.sale.view.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="check_in_date"/>
+                <field name="check_out_date"/>
+            </xpath>
+            <xpath expr="//field[@name='sale_order_template_id']" position="before">
+                <field name="choose_hall_id"/>
+                <field name="choose_food_package_id"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']"
+                   position="after">
+                <field name="is_line_manage_hall" invisible="1"/>
+                <field name="is_line_food_package" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--    inherit calendar view and change date-start and date-stop -->
+    <record id="sale.view_sale_order_calendar" model="ir.ui.view">
+        <field name="name">sale.order.calendar</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <calendar string="Sales Orders" date_start="check_in_date" date_stop="check_out_date" color="state"
+                      hide_time="true"
+                      event_limit="5">
+                <field name="currency_id" invisible="1"/>
+                <field name="partner_id" avatar_field="avatar_128"/>
+                <field name="amount_total" widget="monetary"/>
+                <field name="payment_term_id"/>
+                <field name="state" filters="1" invisible="1"/>
+            </calendar>
+        </field>
+    </record>
+</odoo>
+
