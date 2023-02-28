@@ -7,12 +7,13 @@
     'summary': 'Hall Booking Management',
     'website': 'https://www.intuz.net',
     'depends': [
-        'base', 'product', 'sale_management'
+        'base', 'product', 'sale_management', 'stock'
     ],
     'data': [
         'views/sale.xml',
         'views/manage_food_package_view.xml',
         'views/manage_hall_view.xml',
+        'views/stock_picking_view.xml',
     ],
     'assets': {},
     'installable': True,
@@ -20,4 +21,3 @@
     'auto_install': False,
 
 }
-
