@@ -26,3 +26,4 @@ access_account_tax_group_sale_manager_marketing,account.tax.group sale manager,a
 access_sale_advance_payment_inv_marketing,access.sale.advance.payment.inv,sale.model_sale_advance_payment_inv,group_sale_readonly_access_for_marketing,1,0,0,0
 access_sale_order_cancel_marketing,access.sale.order.cancel,sale.model_sale_order_cancel,group_sale_readonly_access_for_marketing,1,0,0,0
 access_payment_link_wizard_sale_marketing,access.payment.link.wizard.sale,sale.model_payment_link_wizard,group_sale_readonly_access_for_marketing,1,0,0,0
+access_payment_link_stock_picking,access.payment.link.wizard.stock.picking,stock.model_stock_picking,group_sale_readonly_access_for_marketing,1,0,0,0
