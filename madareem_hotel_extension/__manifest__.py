@@ -15,6 +15,7 @@
         'views/manage_hall_view.xml',
         'views/stock_picking_view.xml',
         'security/madareem_security.xml',
+        'security/ir.model.access.csv',
     ],
     'assets': {},
     'installable': True,
