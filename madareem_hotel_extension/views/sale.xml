@@ -53,6 +53,18 @@
                 <field name="is_line_manage_hall" invisible="1"/>
                 <field name="is_line_food_package" invisible="1"/>
             </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                <attribute name="groups">sales_team.group_sale_salesman</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="attributes">
+                <attribute name="groups">sales_team.group_sale_salesman</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_total']" position="attributes">
+                <attribute name="groups">sales_team.group_sale_salesman</attribute>
+            </xpath>
+            <xpath expr="//group[@name='sale_total']" position="attributes">
+                <attribute name="groups">sales_team.group_sale_salesman</attribute>
+            </xpath>
         </field>
     </record>
 
@@ -70,6 +82,18 @@
                 <field name="payment_term_id"/>
                 <field name="state" filters="1" invisible="1"/>
             </calendar>
+        </field>
+    </record>
+
+    <!--    equipment  -->
+    <record id="hr_equipment_view_form_barcode_inherit" model="ir.ui.view">
+        <field name="name">hr.equipment.view.form.barcode.inherit</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='location']" position="after">
+                <field name="barcode"/>
+            </xpath>
         </field>
     </record>
 </odoo>

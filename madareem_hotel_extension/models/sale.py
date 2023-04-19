@@ -87,20 +87,27 @@ class saleorderdetails(models.Model):
                         'price_unit': order.choose_food_package_id.product_variant_id.list_price,
                         'display_type': False, })]
 
-    class SaleOrderLine(models.Model):
-        _inherit = 'sale.order.line'
+class SaleOrderLine(models.Model):
+    _inherit = 'sale.order.line'
 
-        is_line_manage_hall = fields.Boolean(string="Is Manage Hall")
-        is_line_food_package = fields.Boolean(string="Is Food Package")
+    is_line_manage_hall = fields.Boolean(string="Is Manage Hall")
+    is_line_food_package = fields.Boolean(string="Is Food Package")
 
-        @api.onchange('product_id')
-        def _onchange_vehicle(self):
-            if self.product_id.is_food_package == True:
-                self.is_line_food_package = True
-            else:
-                self.is_line_food_package = False
+    @api.onchange('product_id')
+    def _onchange_vehicle(self):
+        if self.product_id.is_food_package == True:
+            self.is_line_food_package = True
+        else:
+            self.is_line_food_package = False
 
-            if self.product_id.is_hall_manage == True:
-                self.is_line_manage_hall = True
-            else:
-                self.is_line_manage_hall = False
+        if self.product_id.is_hall_manage == True:
+            self.is_line_manage_hall = True
+        else:
+            self.is_line_manage_hall = False
+
+
+class MaintenanceEquipment(models.Model):
+    _inherit = 'maintenance.equipment'
+
+    barcode = fields.Char(string='Barcode')
+
