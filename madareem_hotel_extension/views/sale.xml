@@ -68,6 +68,17 @@
         </field>
     </record>
 
+    <record id="hall_sale_view_order_tree_inherit" model="ir.ui.view">
+        <field name="name">hall.sale.tree.inherit.sale.stock</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total']" position="attributes">
+                <attribute name="groups">sales_team.group_sale_salesman</attribute>
+            </xpath>
+        </field>
+    </record>
+
     <!--    inherit calendar view and change date-start and date-stop -->
     <record id="sale.view_sale_order_calendar" model="ir.ui.view">
         <field name="name">sale.order.calendar</field>
@@ -78,7 +89,7 @@
                       event_limit="5">
                 <field name="currency_id" invisible="1"/>
                 <field name="partner_id" avatar_field="avatar_128"/>
-                <field name="amount_total" widget="monetary"/>
+                <field name="amount_total" widget="monetary" groups="sales_team.group_sale_salesman"/>
                 <field name="payment_term_id"/>
                 <field name="state" filters="1" invisible="1"/>
             </calendar>
